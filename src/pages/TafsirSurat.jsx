@@ -6,7 +6,7 @@ function TafsirSurat() {
   const [detail, setDetail] = useState(null);
 
   useEffect(() => {
-    fetch(`https://equran.id/api/v2/surat/${nomor}`)
+    fetch(`https://equran.id/api/v2/tafsir/${nomor}`)
       .then((res) => res.json())
       .then((data) => setDetail(data.data));
   }, [nomor]);
@@ -16,7 +16,7 @@ function TafsirSurat() {
   return (
     <div className="container mt-4">
 
-      {/* 🔥 tombol kembali */}
+      {/* tombol kembali */}
       <Link to={`/surat/${nomor}`} className="btn btn-outline-secondary mb-3">
         ← Kembali ke Detail
       </Link>
@@ -29,22 +29,28 @@ function TafsirSurat() {
         {detail.arti}
       </p>
 
-      {/* 🔥 TAFSIR */}
-      {detail.tafsir.id.map((item, index) => (
-        <div key={index} className="card mb-3 shadow-sm border-0">
-          <div className="card-body">
+      {/* TAFSIR */}
+      {detail.tafsir && detail.tafsir.length > 0 ? (
+        detail.tafsir.map((item, index) => (
+          <div key={index} className="card mb-3 shadow-sm border-0">
+            <div className="card-body">
 
-            <h6 className="fw-bold">
-              Ayat {item.ayat}
-            </h6>
+              <h6 className="fw-bold">
+                Ayat {item.ayat}
+              </h6>
 
-            <p className="text-muted">
-              {item.teks}
-            </p>
+              <p className="text-muted">
+                {item.teks}
+              </p>
 
+            </div>
           </div>
+        ))
+      ) : (
+        <div className="alert alert-warning text-center">
+          ⚠️ Tafsir tidak tersedia untuk surat ini
         </div>
-      ))}
+      )}
     </div>
   );
 }

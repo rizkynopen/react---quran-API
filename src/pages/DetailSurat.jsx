@@ -7,7 +7,7 @@ function DetailSurat() {
   const [detail, setDetail] = useState(null);
 
   const audioRefs = useRef({});
-  const fullAudioRef = useRef(null); // 🔥 NEW
+  const fullAudioRef = useRef(null);
 
   const [showTerjemah, setShowTerjemah] = useState({});
 
@@ -19,7 +19,6 @@ function DetailSurat() {
 
   if (!detail) return <p className="text-center mt-4">Loading...</p>;
 
-  // 🔥 AUDIO AYAT
   const handlePlay = (id) => {
     audioRefs.current[id]?.play();
   };
@@ -33,7 +32,6 @@ function DetailSurat() {
     audioRefs.current[id].currentTime = 0;
   };
 
-  // 🔥 AUDIO FULL
   const playFull = () => fullAudioRef.current?.play();
   const pauseFull = () => fullAudioRef.current?.pause();
   const stopFull = () => {
@@ -68,7 +66,7 @@ function DetailSurat() {
         <p className="text-muted mb-0">{detail.arti}</p>
       </div>
 
-      {/* 🔥 AUDIO FULL SURAT */}
+      {/* AUDIO FULL SURAT */}
       {detail.audioFull && detail.audioFull["01"] && (
         <div className="card mb-4 shadow-sm border-0">
           <div className="card-body text-center">
@@ -172,6 +170,16 @@ function DetailSurat() {
           </div>
         </div>
       ))}
+      
+      {/* LINK KE TAFSIR */}
+      <div className="tafsir surat mb-4">
+        <Link
+          to={`/surat/${nomor}/tafsir`}
+          className="btn btn-outline-secondary w-100"
+        >
+          📖 Lihat Tafsir Surat
+        </Link>
+      </div>
     </div>
   );
 }

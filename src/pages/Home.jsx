@@ -3,8 +3,6 @@ import CardSurat from "../components/CardSurat";
 
 function Home() {
   const [surat, setSurat] = useState([]);
-  
-  // 🔥 NEW: state untuk search
   const [search, setSearch] = useState("");
 
   useEffect(() => {
@@ -13,7 +11,6 @@ function Home() {
       .then((data) => setSurat(data.data));
   }, []);
 
-  // 🔥 NEW: filter data berdasarkan search
   const filteredSurat = surat.filter((item) =>
     item.namaLatin.toLowerCase().includes(search.toLowerCase())
   );
@@ -28,7 +25,7 @@ function Home() {
         Pilih surat untuk melihat detail dan mendengarkan audio
       </p>
 
-      {/* 🔥 NEW: INPUT SEARCH */}
+      {/* NEW: INPUT SEARCH */}
       <div className="mb-4">
         <input
           type="text"
@@ -40,13 +37,12 @@ function Home() {
       </div>
 
       <div className="row">
-        {/* 🔥 UPDATED: pakai filteredSurat */}
+        {/* UPDATED: pakai filteredSurat */}
         {filteredSurat.length > 0 ? (
           filteredSurat.map((item) => (
             <CardSurat key={item.nomor} item={item} />
           ))
         ) : (
-          // 🔥 NEW: kalau tidak ditemukan
           <p className="text-center text-muted">
             Surat tidak ditemukan
           </p>
