@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import DetailSurat from "./pages/DetailSurat";
 import TafsirSurat from "./pages/TafsirSurat";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/surat/:nomor" element={<DetailSurat />} />
       <Route path="/surat/:nomor/tafsir" element={<TafsirSurat />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 }
